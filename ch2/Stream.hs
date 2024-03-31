@@ -12,14 +12,18 @@ append' [] bs = bs
 append' (x:xs) bs = x : append' xs bs
 
 take' :: Int -> [b] -> [b]
-take' 0 _ = []
+take' n _
+  | n <= 0 = []
 take' _ [] = []
 take' a (x:xs) = x : take' (a-1) xs
 
 drop' :: Int -> [b] -> [b]
-drop' 0 bs = bs
+drop' n [b]
+  | n <= 0 = [b]
 drop' _ [] = []
-drop' a (x:xs) = drop' (a-1) xs
+drop' a (x:xs) 
+  | a <= 0 = x:xs
+  | otherwise = drop' (a-1) xs
 
 reverse' :: [b] -> [b]
 reverse' [] = []
